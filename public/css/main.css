@@ -1,8 +1,8 @@
 :root{
     --background-color:#F5F5F5;
-    --secondary-color: #52616B;
-    --secondary-hover-color:#1E2022;
-    --bs-primary-rgb:#424242;
+    --secondary-color: #000F55;
+    --secondary-hover-color:#00082e;
+    --bs-primary-rgb:#2e2e2e;
 
 }
 
@@ -12,7 +12,7 @@ body{
     color: var(--bs-primary-rgb);
     font-weight: 300;
     font-size: 1.2rem;
-    background-image: url(../img/digital\ tech\ book\ logo\ design\ template\ \(1\).png);
+    background-image: url('../img/digital\ tech\ book\ logo\ design\ template\ \(1\).png');
 }
 
 h1,h2,h3,h4,h5,h6{
