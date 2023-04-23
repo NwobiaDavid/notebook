@@ -1,7 +1,7 @@
 :root{
     --background-color:#F5F5F5;
-    --secondary-color: #000F55;
-    --secondary-hover-color:#00082e;
+    --secondary-color: #00167a;
+    --secondary-hover-color:#000F55;
     --bs-primary-rgb:#2e2e2e;
 
 }
@@ -78,4 +78,35 @@ h1,h2,h3,h4,h5,h6{
     --bs-nav-link-color: var(--secondary-color);
     --bs-nav-link-hover-color: var(--secondary-hover-color);
     --bs-nav-link-disabled-color: var(--bs-secondary-color);
+}
+
+/* home */
+
+@media (min-width: 1200px) {
+    .home{
+        background: 
+        url('../img/undraw_file_synchronization_re_m5jd.svg') right bottom no-repeat,
+        url('../img/undraw_notebook_re_id0r.svg') left bottom no-repeat ,
+        url('../img/digital\ tech\ book\ logo\ design\ template\ \(1\).png') left top repeat,
+        var(--background-color);
+       
+    }
+}
+
+.home{
+
+}
+
+.home-title::before{
+    content: url('../img/download-removebg-preview\ \(1\).png');
+    position: absolute;
+    left: -50px;
+    top: -30px;
+}
+
+.home-title::after{
+    content: url('../img/download-removebg-preview\ \(1\).png');
+    position: absolute;
+    right: -50px;
+    bottom: -30px;
 }
