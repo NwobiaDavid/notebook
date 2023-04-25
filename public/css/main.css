@@ -21,7 +21,8 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .container-fluid-custom{
-    max-width: 1600px;
+    /* max-width: 1600px; */
+    max-width: 100vw;
 }
 
 /* Buttons */
@@ -85,7 +86,7 @@ h1,h2,h3,h4,h5,h6{
 @media (min-width: 1200px) {
     .home{
         background: 
-        /* url('../img/undraw_file_synchronization_re_m5jd.svg') right bottom no-repeat,
+        /* url('../img/undraw_file_synchronization_re_m5jd (1).svg') right bottom no-repeat,
         url('../img/undraw_notebook_re_id0r.svg') left bottom no-repeat , */
         url('../img/digital\ tech\ book\ logo\ design\ template\ \(1\).png') left top repeat,
         var(--background-color);
@@ -93,15 +94,13 @@ h1,h2,h3,h4,h5,h6{
     }
 }
 
-.home{
-  
-}
-
-.home-title::before{
+@media (min-width: 1024px) {
+    .home-title::before{
     content: url('../img/download-removebg-preview\ \(1\).png');
     position: absolute;
     left: -50px;
     top: -30px;
+    
 }
 
 .home-title::after{
@@ -110,3 +109,19 @@ h1,h2,h3,h4,h5,h6{
     right: -50px;
     bottom: -30px;
 }
+}
+
+/* .home-title::before{
+    content: url('../img/download-removebg-preview\ \(1\).png');
+    position: absolute;
+    left: -50px;
+    top: -30px;
+}
+
+
+.home-title::after{
+    content: url('../img/download-removebg-preview\ \(1\).png');
+    position: absolute;
+    right: -50px;
+    bottom: -30px;
+} */

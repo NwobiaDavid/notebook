@@ -20,7 +20,7 @@ const UserSchema = new Schema({
     },
     profileImage:{
         type: String,
-        required: true
+        // required: true
     },
     createdAt:{
         type: Date,
@@ -29,4 +29,4 @@ const UserSchema = new Schema({
 });
 
 
-module.exports = mongoose.model('User', UserSchema)
+module.exports = mongoose.model('User', UserSchema);

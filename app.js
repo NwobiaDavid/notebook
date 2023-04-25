@@ -18,7 +18,8 @@ app.use(session({
     saveUninitialized: true,
     store: MongoStore.create({
         mongoUrl: process.env.MONGO_URL
-    })
+    }),
+    cookie: {expires: new Date(Date.now() + (3600000))}
     }));
 
 app.use(passport.initialize());

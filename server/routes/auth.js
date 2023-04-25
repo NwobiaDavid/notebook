@@ -12,13 +12,16 @@ passport.use(new GoogleStrategy({
   },
   async function(accessToken, refreshToken, profile, done) {
 
-    const newUser = {
+    console.log(profile);
+
+    const newUser = new User({
          googleId: profile.id,
          displayName: profile.displayName,
          firstName: profile.name.givenName,
          lastName: profile.name.familyName,
          image: profile.photos[0].value
-    }
+        //  image: profile.picture
+    });
    
     try {
         let user = await User.findOne({googleId: profile.id});
@@ -51,6 +54,17 @@ router.get('/login-failure',(req,res)=>{
     res.send('something went wrong...');
   });
 
+//removing users session
+router.get('/logout',(req,res)=>{
+    req.session.destroy(error=>{
+        if(error){
+            console.log(error);
+            res.send('error logging out');
+        }else{
+            res.redirect('/');
+        }
+    })
+})
 
 //persists users data after successful authentication
 passport.serializeUser(function (user, done) {
@@ -60,8 +74,15 @@ passport.serializeUser(function (user, done) {
 //retrieve user's data from sessions
 
 passport.deserializeUser(function (id, done) {
-    User.findById(id, function(err, user){
-        done(err, user);
+    // User.findById(id, function(err, user){
+    //     done(err, user);
+    // })
+    User.findById(id)
+    .then(user =>{
+      done(null, user);
+    })
+    .catch(err=>{
+      console.log(err);
     })
 })
 
