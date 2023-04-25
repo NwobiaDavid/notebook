@@ -1,7 +1,7 @@
 :root{
     --background-color:#F5F5F5;
-    --secondary-color: #00167a;
-    --secondary-hover-color:#000F55;
+    --secondary-color: #001ea1;
+    --secondary-hover-color:#001263;
     --bs-primary-rgb:#2e2e2e;
 
 }
@@ -85,8 +85,8 @@ h1,h2,h3,h4,h5,h6{
 @media (min-width: 1200px) {
     .home{
         background: 
-        url('../img/undraw_file_synchronization_re_m5jd.svg') right bottom no-repeat,
-        url('../img/undraw_notebook_re_id0r.svg') left bottom no-repeat ,
+        /* url('../img/undraw_file_synchronization_re_m5jd.svg') right bottom no-repeat,
+        url('../img/undraw_notebook_re_id0r.svg') left bottom no-repeat , */
         url('../img/digital\ tech\ book\ logo\ design\ template\ \(1\).png') left top repeat,
         var(--background-color);
        
@@ -94,7 +94,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .home{
-
+  
 }
 
 .home-title::before{

@@ -7,12 +7,24 @@ const passport = require('passport');
 const MongoStore = require('connect-mongo');
 
 
+
 const app = express();
 const port = 5000 || process.env.PORT;
 
-// // initializing passport
-// app.use(passport.initialize());
-// app.use(passport.session());
+// initializing passport
+app.use(session({ 
+    secret: process.env.SECRET, 
+    resave: false,
+    saveUninitialized: true,
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGO_URL
+    })
+    }));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
@@ -33,6 +45,9 @@ app.set('view engine','ejs');
 app.use('/', require('./server/routes/auth'));
 app.use('/', require('./server/routes/index'));
 app.use('/', require('./server/routes/dashboard'));
+
+
+
 
 // handling 404 route error
 app.get("*",(req,res)=>{
