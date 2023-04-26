@@ -1,7 +1,8 @@
 <div class="container-fluid container-fluid-custom pb-5 mb-5">
-    <div class="row ">
+    <div class="row">
+        <h3 class="fs-2 fw-normal text-decoration-underline">search results...</h3>
         <%if(searchResults !== ''){searchResults.forEach((note,index)=>{%>
-                <a href="/dashboard/item/<%= note._id %>">
+                <a href="/dashboard/item/<%= note._id %>" class="text-decoration-none m-1">
                 <h4><%= note.title %></h4>
                 </a>
                 <%})}else{%>

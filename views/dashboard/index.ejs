@@ -1,11 +1,11 @@
 <div class="container-fluid container-fluid-custom pb-5 mb-5">
   <div class="row mb-4">
     <div class="col">
-      <h1>hey, <%= userName %> </h1>
+      <h1>Hey, <%= userName %> </h1>
      
     </div>
     <div class="col text-end">
-      <a href="/dashboard/add" class="btn btn-primary">+ new note</a>
+      <a href="/dashboard/add" class="btn btn-primary">+ Note</a>
     </div>
   </div>
 
@@ -25,10 +25,10 @@
     <% })}else{ %>
     <div class="row">
       <div class="col mt-md-4">
-        <h2>
+        <h2 class="fs-2 fw-normal text-center">
           write your first note <br />
           <br />
-          <a href="/dashboard/add"> write </a>
+          <a href="/dashboard/add" class="text-decoration-none"> write </a>
         </h2>
       </div>
     </div>

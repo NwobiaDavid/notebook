@@ -125,17 +125,17 @@ exports.dashboardSearch = async(req,res)=>{
 exports.dashboardSearchSubmit = async(req,res)=>{
     try {
           let searchTerm = req.body.searchTerm;
-          const searchNoSpecialChars = searchTerm.replace(/[^a-zA-Z0-9]/g, "");
+          const searchNoSpecialChars = searchTerm.replace(/[^a-zA-Z0-9 ]/g, '');
 
-          const searchResult = await Note.find({
+          const searchResults = await Note.find({
             $or:[
-                {title:{$regrex: new RegExp(searchNoSpecialChars, 'i') }},
-                {body:{$regrex: new RegExp(searchNoSpecialChars, 'i') }},
+                {title:{$regex: new RegExp(searchNoSpecialChars, 'i') }},
+                {body:{$regex: new RegExp(searchNoSpecialChars, 'i') }},
             ]
           }).where({user: req.user.id});
 
           res.render('dashboard/search',{
-            searchResult,
+            searchResults,
             layout: '../views/layouts/dashboard'
           }) 
 

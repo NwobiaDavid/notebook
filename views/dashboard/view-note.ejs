@@ -8,24 +8,24 @@
                 </ol>
             </nav>
             <div class="col d-flex justify-content-between align-items-center">
-                <h1 class="h3">view note</h1>
+                <h1 class="h3">viewing note...</h1>
 
                 <button type="button" class="btn btn-danger me-2" data-bs-toggle="modal" id="deleteButton" data-bs-target="#deleteModal">delete</button>
             </div>
         </div>
     </div>
 
-    <form action="/dashboard/item/<%= noteID %>?_method=PUT" method="POST" class="position-relative" style="left: 1px; right:1px ; top: 1px;">
-        <div class="form-group mb-4 position-absolute" >
+    <form action="/dashboard/item/<%= noteID %>?_method=PUT" method="POST" class="d-flex flex-column "style="left: 1px; right:1px ; top: 1px;">
+        <div class="form-group mb-3" >
             <input type="text" id="title" name="title" value="<%= note.title %>" placeholder="Title" class="form-control fw-bold border-0 fs-4">
         </div>
  
         <div class="from-group mb-4">
-            <textarea class="form-control pt-5 fs-4" name="body" id="body" placeholder="take a note..." cols="30" rows="10"><%= note.body %></textarea>
+            <textarea class="form-control fs-4" name="body" id="body" placeholder="take a note..." cols="30" rows="10"><%= note.body %></textarea>
         </div>
 
         <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-lg">Edit</button>
+            <button type="submit" class="btn btn-primary btn-lg">Update</button>
         </div>
     </form>
 
