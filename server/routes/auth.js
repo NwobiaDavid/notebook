@@ -73,18 +73,27 @@ passport.serializeUser(function (user, done) {
 
 //retrieve user's data from sessions
 
-passport.deserializeUser(function (id, done) {
-    // User.findById(id, function(err, user){
-    //     done(err, user);
-    // })
-    User.findById(id)
-    .then(user =>{
-      done(null, user);
-    })
-    .catch(err=>{
-      console.log(err);
-    })
-})
+// passport.deserializeUser(function (id, done) {
+//     // User.findById(id, function(err, user){
+//     //     done(err, user);
+//     // })
+//     User.findById(id)
+//     .then(user =>{
+//       done(null, user);
+//     })
+//     .catch(err=>{
+//       console.log(err);
+//     })
+// })
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findById(id);
+    done(null, user);
+  } catch (err) {
+    done(err, null);
+  }
+});
 
 
 module.exports = router;

@@ -3,35 +3,64 @@ const mongoose = require('mongoose');
 
 
 // GET dashboard
-exports.dashboard = async (req,res)=>{
+exports.dashboard = async (req, res) => {
 
-const locals ={
-        title:"Dashboard",
-        description: "A NodeJs Note App"
-    }
-
-   
-    // Note.insertMany([
-    //     {user:"64483f507e47be1286906b38" , title:"test 1", body:"some random text i'm randomly typing", createdAt: '2023-04-25T21:00:00.088+00:00'},
-    //     {user:"64483f507e47be1286906b38" , title:"test 2", body:"another random text i'm randomly typing", createdAt: '2023-04-25T21:00:00.088+00:00'}
-    // ])
-    // .then(()=>{console.log('successfully inserted');})
-    // .catch(err=>{console.log(err);});
-
+    let perPage = 12;
+    let page = req.query.page || 1;
+  
+    const locals = {
+      title: "Dashboard",
+      description: "Free NodeJS Notes App.",
+    };
+  
     try {
-       const notes = await Note.find();
-       
- res.render('dashboard/index', {
+      // Mongoose "^7.0.0 Update
+      const notes = await Note.aggregate([
+        { $sort: { updatedAt: -1 } },
+        { $match: { user: new mongoose.Types.ObjectId(req.user.id) } },
+        {
+          $project: {
+            title: { $substr: ["$title", 0, 30] },
+            body: { $substr: ["$body", 0, 100] },
+          },
+        },
+      ])
+      .skip(perPage * page - perPage)
+      .limit(perPage)
+      .exec();
+  
+      const count = await Note.count();
+  
+      res.render('dashboard/index', {
         userName: req.user.firstName,
-        image: req.user.profileImage,
         locals,
         notes,
-        layout: '../views/layouts/dashboard'
-    });
-   
-
-    } catch (error) {
-        console.log(err);
+        layout: "../views/layouts/dashboard",
+        current: page,
+        pages: Math.ceil(count / perPage)
+      });
+     } catch (error) {
+      console.log(error);
     }
+  };
+
+
+//   getting specific note
+exports.dashboardViewNote = async (req,res)=>{
+    const note = await Note.findById({_id: req.params.id })
+    .where({ user: req.user.id}).lean();
+
+    if(note){
+        res.render('dashboard/view-note',{
+            noteID: req.params.id,
+            note,
+            layout: '../views/layouts/dashboard'
+        });
+    }else{
+        res.send('something went wrong...')
+    }
+}
+
+exports.dashboardUpdateNote = async (req,res)=>{
     
-};
+}

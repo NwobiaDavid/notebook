@@ -1,36 +1,91 @@
 <div class="container-fluid container-fluid-custom pb-5 mb-5">
+  <div class="row mb-4">
+    <div class="col">
+      <h1>hey, <%= userName %> </h1>
+     
+    </div>
+    <div class="col text-end">
+      <a href="/dashboard/add" class="btn btn-primary">+ new note</a>
+    </div>
+  </div>
 
-
-        <div class="row mb-4">
-            <div class="col">
-                <h1>hey, <%= userName %></h1>
-                <img src="<%= image %>" alt="" height="100px" width="100px">
-            </div>
-            <div class="col text-end">
-                <a href="/dashboard/add" class="btn btn-primary">+ new note</a>
-            </div>
-        </div>
-
-<div class="row">
+  <div class="row">
     <% if(notes.length > 0){notes.forEach(obj=>{ %>
-            <div class="col-sm-3 mb-4">
-                <div class="card border-primary" style="min-height: 210px;">
-                    <a href="/dashboard/item<%= obj._id %>" class="card-body text-decoration-none">
-                        <h5 class="card-title"><%= obj.title %></h5>
-                        <p class="card-text"><%= obj.body %></p>
-                    </a>
-                </div>
-            </div>
-        <% })}else{ %>
-        <div class="row">
-            <div class="col mt-md-4">
-                <h2>write your first note <br> <br>
-                    <a href="/dashboard/add"> write </a>
-                </h2>
-            </div>
-        </div>
-        <%}%>
-</div>
+    <div class="col-sm-3 mb-4">
+      <div class="card border-primary" style="min-height: 210px">
+        <a
+          href="/dashboard/item/<%= obj._id %>"
+          class="card-body text-decoration-none"
+        >
+          <h5 class="card-title"><%= obj.title %></h5>
+          <p class="card-text"><%= obj.body %></p>
+        </a>
+      </div>
+    </div>
+    <% })}else{ %>
+    <div class="row">
+      <div class="col mt-md-4">
+        <h2>
+          write your first note <br />
+          <br />
+          <a href="/dashboard/add"> write </a>
+        </h2>
+      </div>
+    </div>
+    <%}%>
+  </div>
 
+  
 
+  <% if(notes.length>0){ %>
+
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center mt-5">
+
+        <%if(current == 1){%>
+            <li class="page-item"><a href="#" class="page-link">Previous</a></li>
+            <%}else{%>
+            <li class="page-item"><a href="/" class="page-link">First</a></li>
+            <%}%>
+
+            <%let i = (Number(current) > 5 ? Number(current) -4 : 1)%>
+            <%if(i !== 1){%>
+            <li class="page-item"><a href="#" class="page-link">...</a></li>
+            <%}%>
+
+            <% for(let i = (Number(current) > 5 ? Number(current) -4 : 1); i <= (Number(current) + 4) && i <= pages; i++){ %>
+                <% if(i == current){%>
+                <li class="page-item"><a href="#" class="page-link"><%= i %></a></li>
+                <%}else{%>
+                <li class="page-item"><a href="/dashboard/?page=<%= i %>" class="page-link"><%= i %></a></li>
+                <%}%>
+
+                <%if(i == (Number(current) + 4) && i < pages){%>
+                <li class="page-item"><a href="#" class="page-link">...</a></li>
+                <%}%>
+
+                <%if(i == ( Number(current)) + 4 && i < pages){%>
+                <li class="page-item"><a href="#" class="page-link">...</a></li>
+                <%}%>
+                <%}%>
+
+                <!-- <% for(let i = Math.max(current-2, 1); i<=Math.min(current+2, pages); i++){ %>
+                    <% if(i == current){ %>
+                      <li class="page-item active"><a href="/dashboard/?page=<%= i %>" class="page-link"><%= i %></a></li>
+                    <% } else { %>
+                      <li class="page-item"><a href="/dashboard/?page=<%= i %>" class="page-link"><%= i %></a></li>
+                    <% } %>
+                  <% } %> -->
+                  
+
+                <%if(current == pages){%>
+            <li class="page-item disable"><a href="#" class="page-link">Last</a></li>
+            <%}else{%>
+                <li class="page-item disable"><a href="/dashboard/?page=<%= pages %>" class="page-link">next</a></li>
+                <%}%>
+
+    </ul>
+  </nav>
+
+  <%}%>
 </div>
