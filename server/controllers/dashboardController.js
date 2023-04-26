@@ -61,6 +61,85 @@ exports.dashboardViewNote = async (req,res)=>{
     }
 }
 
+
+// updating specific notes with method override
 exports.dashboardUpdateNote = async (req,res)=>{
-    
+    try {
+        await Note.findOneAndUpdate(
+            { _id: req.params.id},
+            {title: req.body.title, body:req.body.body, updatedAt: Date.now()})
+            .where({user: req.user.id});
+
+            res.redirect('/dashboard');
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// deleting specific notes
+
+exports.dashboardDeleteNote = async (req,res)=>{
+    try {
+        await Note.deleteOne({_id: req.params.id}).where({user: req.user.id});
+        res.redirect('/dashboard');
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+// adding new notes
+
+exports.dashboardAddNote = async (req,res)=>{
+    res.render('dashboard/add',{
+        layout: '../views/layouts/dashboard'
+    })
+}
+
+exports.dashboardAddNoteSubmit = async(req,res)=>{
+    try {
+        req.body.user = req.user.id;
+        await Note.create(req.body);
+        res.redirect('/dashboard');
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+// getting search
+
+exports.dashboardSearch = async(req,res)=>{
+    try {
+        res.render('/dashboard/search',{
+            searchResult: '',
+            layouts: '../views/layouts/dashboard'
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// submitting search input
+
+exports.dashboardSearchSubmit = async(req,res)=>{
+    try {
+          let searchTerm = req.body.searchTerm;
+          const searchNoSpecialChars = searchTerm.replace(/[^a-zA-Z0-9]/g, "");
+
+          const searchResult = await Note.find({
+            $or:[
+                {title:{$regrex: new RegExp(searchNoSpecialChars, 'i') }},
+                {body:{$regrex: new RegExp(searchNoSpecialChars, 'i') }},
+            ]
+          }).where({user: req.user.id});
+
+          res.render('dashboard/search',{
+            searchResult,
+            layout: '../views/layouts/dashboard'
+          }) 
+
+    } catch (error) {
+        console.log(error);
+    }
 }

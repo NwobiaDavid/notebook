@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const methodOverride = require('method-override');
 const expressLayouts = require('express-ejs-layouts');
 const connectDB = require('./server/config/db');
 const session = require('express-session');
@@ -29,6 +30,7 @@ app.use(passport.session());
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use(methodOverride("_method"));
 
 // connecting to the mongo database
 connectDB();

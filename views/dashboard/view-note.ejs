@@ -1,6 +1,4 @@
-view notes page
-
-<div class="container-fluid container-fluid-custom pb-5 mb-5">
+ <div class="container-fluid container-fluid-custom pb-5 mb-5">
     <div class="row mb-4">
         <div class="col">
             <nav aria-label="breadcrumb">
@@ -12,18 +10,22 @@ view notes page
             <div class="col d-flex justify-content-between align-items-center">
                 <h1 class="h3">view note</h1>
 
-                <button type="button" class="btn btn-danger me-2" data-bs-toggle="model" id="deleteButton" data-bs-target="#deleteModel">delete</button>
+                <button type="button" class="btn btn-danger me-2" data-bs-toggle="modal" id="deleteButton" data-bs-target="#deleteModal">delete</button>
             </div>
         </div>
     </div>
 
-    <form action="" method="POST" class="position-relative" style="left: 1px; right:1px ; top: 1px;">
+    <form action="/dashboard/item/<%= noteID %>?_method=PUT" method="POST" class="position-relative" style="left: 1px; right:1px ; top: 1px;">
         <div class="form-group mb-4 position-absolute" >
             <input type="text" id="title" name="title" value="<%= note.title %>" placeholder="Title" class="form-control fw-bold border-0 fs-4">
         </div>
  
         <div class="from-group mb-4">
             <textarea class="form-control pt-5 fs-4" name="body" id="body" placeholder="take a note..." cols="30" rows="10"><%= note.body %></textarea>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-lg">Edit</button>
         </div>
     </form>
 
@@ -33,11 +35,11 @@ view notes page
 </div>
 
 
-<div class="modal fade" tabindex="-1" id="deleteModel">
+<div class="modal fade" tabindex="-1" id="deleteModal">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">are you sure you want to delete this note?</h5>
+          <h5 class="modal-title">deleting this note...</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -46,7 +48,12 @@ view notes page
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
-          <button type="button" class="btn btn-primary">Delete note</button>
+
+          <form action="/dashboard/item-delete/<%= noteID %>?_method=DELETE" method="POST" class="position-relative">
+            <button type="submit" class="btn btn-danger">Delete note</button>
+        </form>
+
+
         </div>
       </div>
     </div>
