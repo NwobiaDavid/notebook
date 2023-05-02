@@ -8,7 +8,7 @@ const User = require('../models/User')
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: process.env.GOOGLE_CALLBACK
+    callbackURL: "https://notebook-nglu.onrender.com/google/callback"
   },
   async function(accessToken, refreshToken, profile, done) {
 
